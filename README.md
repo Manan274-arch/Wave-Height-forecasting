@@ -2,7 +2,7 @@
 
 An undergraduate machine learning project for **direct multiclass classification of the highest experimental wave-warning category reached over the next six hours** near offshore Udupi, Karnataka, India. This is a classification study, not a regression study.
 
-**Current status:** historical CSV preparation and Phase 1 EDA are complete. `notebooks/02_preprocessing.ipynb` now contains validation, intermediate future-maximum construction, candidate-category analysis and chronological 70/10/20 partitioning code. Phase 2 has not been executed automatically; its results and warning thresholds remain to be reviewed. Notebooks 03, 04 and 05 contain Markdown placeholders only. No models have been trained or operational warning capability validated.
+**Current status:** historical CSV preparation, Phase 1 EDA and Phase 2 preprocessing are complete. The project has finalized the 2.5 m / 3.0 m experimental classification boundaries. `notebooks/03_feature_engineering.ipynb` contains deterministic causal feature engineering and X/y preparation code, supplied unexecuted for manual review. Notebooks 04 and 05 remain Markdown placeholders. No classifier has been trained or evaluated, and no operational warning capability has been validated.
 
 ## Contents
 
@@ -95,8 +95,8 @@ Wave Forecasting/
 |-- prepare_data.py                # Implemented CSV preparation
 |-- notebooks/
 |   |-- 01_eda.ipynb               # Completed EDA; preserved unchanged
-|   |-- 02_preprocessing.ipynb     # Phase 2 validation, target analysis and splits; unexecuted
-|   |-- 03_feature_engineering.ipynb # Markdown placeholder
+|   |-- 02_preprocessing.ipynb     # Completed validation, target investigation and chronological split
+|   |-- 03_feature_engineering.ipynb # Causal features and X/y objects; unexecuted
 |   |-- 04_model_training.ipynb    # Markdown placeholder
 |   `-- 05_model_evaluation.ipynb  # Markdown placeholder
 `-- data/
@@ -109,41 +109,74 @@ The notebook workflow replaces the previous docstring-only `src/` modules and `m
 
 | Phase | Notebook | Status |
 |---|---|---|
-| 1. Dataset inspection and EDA | `01_eda.ipynb` | Completed; existing cells and outputs preserved |
-| 2. Validation and warning-target investigation | `02_preprocessing.ipynb` | Implemented code, awaiting manual execution and review |
-| 3. Historical feature engineering | `03_feature_engineering.ipynb` | Markdown placeholder; not implemented |
+| 1. Dataset inspection and EDA | `01_eda.ipynb` | Completed; original cells and outputs preserved |
+| 2. Preprocessing and target investigation | `02_preprocessing.ipynb` | Completed; original cells and outputs preserved |
+| 3. Causal feature engineering | `03_feature_engineering.ipynb` | Implemented, awaiting manual execution/review |
 | 4. Classifier training | `04_model_training.ipynb` | Markdown placeholder; not implemented |
 | 5. Classifier evaluation | `05_model_evaluation.ipynb` | Markdown placeholder; not implemented |
 
-Phase 2 reads the CSV independently, parses UTC timestamps, sorts in memory, and checks schema, missingness, duplicates, complete three-hourly coverage, numeric/finite/nonnegative heights and physical consistency. Unexpected issues stop processing rather than being silently repaired. The original CSV remains unchanged.
+Phase 2 validated all 29,224 source observations, found no missing measurements/duplicate timestamps/irregular intervals, and retained 29,222 complete future horizons. Four label-boundary exclusions left 20,453 training, 2,920 validation and 5,845 test observations. Its historical threshold investigation is preserved unchanged; the subsequent project decision finalizes the original 2.5 m / 3.0 m pair.
 
-It then constructs a future-height diagnostic, excludes incomplete final horizons, creates chronological partitions and purges target windows crossing their boundaries. The notebook compares the original threshold pair and two fixed sensitivity pairs, without finalizing any of them. Candidate labels exist only in memory for analysis; no final label column or new CSV is produced.
+### Phase 3 feature methodology
 
-Planned feature engineering will use only current/past information: wave/wind histories, trailing statistics, changes, circular directions and seasonal features. The planned classifiers are **Logistic Regression, Decision Tree, Random Forest and XGBoost**. Training-only fitting of any learned transforms, feature selection or imbalance handling remains future work. No scaling, imputation, SMOTE, feature selection, model training or tuning is performed in Phase 2.
+Phase 3 independently reads the original CSV, reconstructs exact future labels, and verifies the Phase 2 counts and UTC dates before building inputs. It contains one straightforward deterministic `make_features` function with explicit feature specifications and a complete in-notebook feature dictionary.
+
+| Input group | Definition | Count |
+|---|---|---:|
+| Current measurements | Four heights, six periods, eastward/northward wind and speed | 13 |
+| Wave directions | Sine/cosine of VMDR, VMDR_SW1, VMDR_SW2 and VMDR_WW, replacing raw degrees | 8 |
+| Historical lags | VHM0 at 3/6/12/24h; speed at 3/6/12h; primary swell height at 6h; VTM02 at 3h | 9 |
+| Changes | Current minus earlier VHM0 at 3/6/12h and speed at 3/6h | 5 |
+| Trailing statistics | VHM0 mean at 6/12/24h, max at 12/24h, sample std at 12h; speed mean at 6/12h, max at 12h | 9 |
+| Seasonality | Sine/cosine of UTC month; no raw month or year | 2 |
+| **Total** | Explicitly selected numerical inputs | **46** |
+
+The current numeric measurements are `VHM0`, `VHM0_SW1`, `VHM0_SW2`, `VHM0_WW`, `VTM01_SW1`, `VTM01_SW2`, `VTM01_WW`, `VTM02`, `VTM10`, `VTPK`, `eastward_wind`, `northward_wind` and `wind_speed`. Constant latitude/longitude are metadata, not predictors. There is no separate wind-direction angle column; signed components retain wind orientation. Speed is dependent on U/V but provides magnitude explicitly, a useful representation for tree models. This redundancy is documented, not removed through learned feature selection.
+
+All lag offsets are positive. Changes are differences in source units, not percentage changes or rates. A trailing 24-hour rolling window contains **8 observations from t-21h through t**, including current; 6h/12h windows contain 2/4 observations. Windows require complete history, use `center=False`, and standard deviation uses `ddof=1`. Wind histories use the available three-hourly CSV, not the archived hourly wind series.
+
+Features are built across the full chronological source before partition selection, preserving valid history across years and split starts. No missing history is filled. The longest lag requires eight earlier rows, so the expected first complete timestamp is **2015-01-02 00:00 UTC**. Only eight initial training rows should be excluded; validation/test retain all Phase 2 rows and their exact boundaries.
+
+Expected model-ready shapes, checked by the notebook when manually executed:
+
+| Partition | Phase 2 rows | History exclusions | X shape | y shape |
+|---|---:|---:|---|---|
+| Training | 20,453 | 8 | `(20445, 46)` | `(20445,)` |
+| Validation | 2,920 | 0 | `(2920, 46)` | `(2920,)` |
+| Testing | 5,845 | 0 | `(5845, 46)` | `(5845,)` |
+
+These are deterministic expected dimensions, not claimed execution results for the new notebook. All six objects remain in memory. Feature previews, class distributions, a training-only correlation heatmap and a fixed training-window wave/trend plot appear inline when run. Correlation is descriptive, not proof of predictive importance; no test statistics select features.
+
+### Leakage prevention
+
+- Future heights/timestamps, `future_max_wave_height` and `target_class` never enter X; negative shifts are isolated to label construction.
+- Positive feature shifts and trailing complete-history rolling windows use only information available at or before prediction time.
+- The notebook reproduces Phase 2 boundaries and label-horizon purging, then applies history exclusions without recalculating split cutoffs.
+- Validation/test may use genuinely available earlier source measurements, including rows excluded as supervised boundary samples. Earlier-partition labels cannot use observations from the next partition.
+- An in-notebook future-perturbation check requires all earlier inputs to remain identical after later measurements are changed in a temporary copy.
+- No scaling, normalization, imputation, SMOTE, oversampling, class weighting, learned feature selection or model fitting occurs. Future learned transformations must be fitted on training only.
+
+Planned classifiers remain **Logistic Regression, Decision Tree, Random Forest and XGBoost**. These will be implemented only in Phase 4 after the feature outputs are reviewed.
 
 ## Target Definition
 
-The intermediate diagnostic at prediction time `t` is:
+At timestamp t, the label-construction diagnostic is:
 
 ```text
 future_max_wave_height = max(VHM0[t+3h], VHM0[t+6h])
 ```
 
-Both future observations must exist at exactly the requested offsets and contain valid heights. The notebook verifies timestamp continuity and explicit +3h/+6h matches before using shifts, and requires both values with `skipna=False`. The final two source observations cannot form complete labels and are excluded from the in-memory labeled dataset, while the original data are preserved.
+Both future timestamps must match the exact offsets and contain valid heights. The maximum uses `skipna=False`; final incomplete horizons remain unclassified and are excluded. This is the maximum of **two sampled future significant wave heights**, not the maximum individual wave during continuous observation. The project trains classifiers, not a regression model on this diagnostic.
 
-This is the maximum of **two future three-hourly significant wave-height observations**, not the maximum individual wave during continuous observation of a six-hour period. It is an intermediate for direct multiclass classification, **not a regression target for training**. Future measurements may define supervised outcomes, but every future-height/time diagnostic and candidate label must be excluded from model inputs.
+### Finalized experimental offshore categories
 
-### Original provisional thresholds: comparison only
-
-| Class | Experimental category | Future maximum significant height |
+| Class | Category | Future maximum significant wave height |
 |---|---|---|
 | 0 | Normal | Below 2.5 m |
-| 1 | Elevated | 2.5-3.0 m inclusive |
-| 2 | High | Above 3.0 m |
+| 1 | Elevated / Watch | 2.5-3.0 m inclusive |
+| 2 | High / Alert | Above 3.0 m |
 
-**Thresholds remain under investigation. These are not finalized criteria or official marine safety warnings.** Phase 2 also compares fixed pairs `(2.25, 2.75)` and `(2.0, 2.5)` metres, using the same lower-inclusive/upper-inclusive Elevated convention. These are sensitivity checks, not quantile-balanced targets or scientifically validated recommendations.
-
-Training-only comparisons show counts, percentages, minority-class size and monthly/yearly Elevated/High distributions. The notebook also shows requested full-period descriptive statistics and partition class counts, including test prevalence, strictly as diagnostics. **Do not use test statistics or full-period quantiles to choose thresholds, features or models.** Final decisions must use a physical/research rationale and training data, consulting validation only if necessary. More statistically convenient class balance does not validate a coastal-warning level.
+The thresholds are **finalized for this project**. Exactly 2.5 m and exactly 3.0 m map to Class 1. They define experimental offshore research categories and are **not official operational marine warnings**. Phase 3 does not change or investigate alternative thresholds. Future diagnostics and integer classification labels remain separate from all input predictors.
 
 ## How to Run
 
@@ -202,21 +235,25 @@ Copernicus handles authentication; do not put credentials in source files. Netwo
 2. Open the project folder and then `notebooks/01_eda.ipynb`.
 3. Use **Select Kernel** to choose the project `.venv` Python 3.11 environment. If it is unavailable, install the declared requirements in that environment first.
 4. Run cells manually from top to bottom with the cell run button or **Shift+Enter**. DataFrames, numerical tables and figures appear below their cells; no output files are exported.
-5. With Phase 1 complete, open `notebooks/02_preprocessing.ipynb` and run its cells manually from top to bottom. It independently loads the CSV, so no shared kernel state from EDA is required. Review its validation summary, future-height verification, threshold comparisons and purged split before progressing to `03_feature_engineering.ipynb`, `04_model_training.ipynb` and `05_model_evaluation.ipynb`. Those later notebooks remain Markdown-only placeholders.
+5. With Phases 1 and 2 complete, open `notebooks/03_feature_engineering.ipynb` and run it manually from top to bottom. It loads the source independently and checks the saved Phase 2 split. Review feature descriptions, leakage checks, shapes and training-only plots before proceeding. Notebooks 04 and 05 remain Markdown placeholders.
 
-The implemented notebooks use relative paths supporting a kernel started from either `notebooks/` or the project root. Phase 2 has been authored without automatic execution: its saved code cells have no execution counts or outputs. Running it displays DataFrames, numerical summaries, a histogram figure and a generated Markdown findings summary inline. It does not save datasets, reports or models, download observations, or modify the source CSV. It is a research review step, not an operational warning pipeline.
+The notebooks support a kernel working directory of either `notebooks/` or the project root. Phase 3 has been authored without automatic execution: all saved code cells have empty outputs and null execution counts. It produces only in-memory objects and inline displays, with no new datasets, model files or reports.
+
+Notebooks do not automatically share variables. Phase 4 must reproduce the deterministic source loading, finalized targets, fixed splits, feature specifications and integrity checks before training. The handoff mechanism will be agreed during Phase 4; no pickle/joblib/CSV intermediate or automatic cross-notebook execution has been added.
 
 ## Evaluation Methodology
 
-Phase 2 implements a **strict chronological 70/10/20 split** of complete-horizon observations. It uses `floor(0.70*N)` initial training rows, `floor(0.10*N)` subsequent validation rows, and assigns the remainder to testing. This is a proportion-based split, not a calendar-year split; there is no shuffling or random train/test split. Exact row counts and UTC boundaries are displayed when the notebook is run.
+Phase 2 implements a **strict chronological 70/10/20 split** of complete-horizon observations. It uses `floor(0.70*N)` initial training rows, `floor(0.10*N)` subsequent validation rows, and assigns the remainder to testing. This is a proportion-based split, not a calendar-year split; there is no shuffling or random train/test split. The completed Phase 2 outputs establish the exact boundaries; Phase 3 reconstructs and verifies them before feature exclusions.
+
+The Phase 2 retained prediction-time ranges are training **2015-01-01 00:00 to 2021-12-31 12:00 UTC**, validation **2021-12-31 21:00 to 2022-12-31 18:00 UTC**, and testing **2023-01-01 03:00 to 2024-12-31 15:00 UTC**. Phase 3 keeps the same partition cutoffs; the first usable training timestamp advances by 24 hours solely for historical context.
 
 To prevent cross-partition label leakage, training rows whose `t+6h` reaches the nominal validation start and validation rows whose horizon reaches the nominal test start are excluded. Boundaries are not recalculated after this purge. The notebook reports excluded rows, usable counts, date ranges, percentages of labeled observations and percentages of retained observations. Small departures from 70/10/20 after purging are expected.
 
-Future historical inputs must remain causal: earlier available observations can provide history, but no future values may enter a predictor. No learned transformation is fitted in Phase 2. The requested test class counts expose holdout prevalence for diagnostic review only; thresholds and tuning must not be selected using those counts or test-period descriptive statistics.
+Future historical inputs must remain causal: earlier available observations can provide history, but no future values may enter a predictor. No learned transformation is fitted in Phases 2 or 3. The requested test class counts expose holdout prevalence for diagnostic review only; test counts and test-period statistics must not drive feature selection or tuning. The project thresholds are now fixed independently of Phase 3 feature inspection.
 
-Planned classifier evaluation will report confusion matrices, precision, recall, F1-score and support for each class, plus macro F1. All four classifiers will use consistent partitions and the eventual agreed classification definition. The validation period may support model selection; the final test period must not drive tuning.
+Planned classifier evaluation will report confusion matrices, precision, recall, F1-score and support for each class, plus macro F1. All four classifiers will use consistent partitions and the finalized 2.5 m / 3.0 m classification definition. The validation period may support model selection; the final test period must not drive tuning.
 
-No models, classification predictions, confusion matrices, measured performance scores or operational capabilities have been produced. Phase 2 generates no regression training target or regression evaluation metrics.
+No models, classification predictions, confusion matrices, measured performance scores or operational capabilities have been produced. Neither Phase 2 nor Phase 3 implements regression training or regression evaluation metrics.
 
 ## Limitations
 
@@ -225,4 +262,4 @@ No models, classification predictions, confusion matrices, measured performance 
 - Forecasting performance has not been established. Model choice, feature usefulness, class balance, and generalization remain to be investigated.
 - The research thresholds are not official coastal or marine warning criteria.
 - Historical retrospective evaluation does not automatically establish operational forecasting capability. Source latency, availability at prediction time, reanalysis revisions, changing conditions, and prospective validation must be considered separately.
-- The repository provides validated historical data, completed EDA and an unexecuted Phase 2 review notebook. Final thresholds, feature methodology and all model results remain undecided. The README will be updated with reviewed findings as implementation progresses.
+- Phases 1 and 2 are complete. Phase 3 feature code awaits manual execution/review; training and evaluation remain unimplemented. Thresholds are finalized for this experimental classification task, while model results and operational performance remain unestablished.
