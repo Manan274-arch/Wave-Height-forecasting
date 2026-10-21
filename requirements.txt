@@ -1,0 +1,8 @@
+copernicusmarine==2.5.0
+xarray==2026.9.0
+numpy==2.4.6
+pandas==3.0.6
+netCDF4==1.7.5
+scipy==1.17.1
+ipykernel>=6.29,<8
+matplotlib>=3.10,<4
