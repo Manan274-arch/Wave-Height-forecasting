@@ -1,0 +1,33 @@
+{
+  "phase5_passed": true,
+  "feature_and_target_partitions_exact": true,
+  "constructor_parameters_match_reference": true,
+  "maximum_prediction_difference_m": {
+    "Linear Regression": 0.0,
+    "Decision Tree": 0.0,
+    "Random Forest": 1.3322676295501878e-15,
+    "XGBoost": 0.0
+  },
+  "independent_metrics_passed": true,
+  "causality_perturbation_passed": true,
+  "evaluation_has_no_fit_calls": true,
+  "rows": {
+    "training": 20444,
+    "validation": 2918,
+    "testing": 5842,
+    "refit": 23362
+  },
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "test_elevated_count": 380,
+  "original_files_preserved": 389,
+  "archived_original_files": 388,
+  "all_original_sizes_and_sha256_match": true,
+  "precleanup_manifest": "C:\\Users\\MANAN_~1\\AppData\\Local\\Temp\\udupi_consolidation_le161d65\\inventory.json",
+  "archive_mapping": "C:\\Users\\MANAN_~1\\AppData\\Local\\Temp\\udupi_consolidation_le161d65\\archive_mapping.json",
+  "git_and_venv_untouched": true,
+  "git_commands_executed": false,
+  "post_archive_feature_script_passed": true,
+  "post_archive_evaluation_passed": true,
+  "active_scripts_have_no_archive_dependencies": true,
+  "ruff_check_passed": true
+}

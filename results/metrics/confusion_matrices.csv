@@ -1,0 +1,5 @@
+model,tn,fp,fn,tp
+Linear Regression,5429,33,56,324
+Decision Tree,5441,21,78,302
+Random Forest,5437,25,59,321
+XGBoost,5433,29,55,325
