@@ -1,0 +1,150 @@
+{
+  "horizons_hours": [
+    6,
+    24,
+    48,
+    72
+  ],
+  "height_threshold_m": 2.5,
+  "probability_threshold": 0.5,
+  "selection": "Highest mean training-only CV Elevated F1; lower sample std then earlier candidate on ties.",
+  "weighting": "balanced class weights calculated separately during each fit; XGBoost compares fixed scale_pos_weight=1 and 3. No full-training ratio leaks into folds.",
+  "candidates": {
+    "Logistic Regression": [
+      {
+        "classifier__C": 0.1,
+        "classifier__class_weight": null
+      },
+      {
+        "classifier__C": 0.1,
+        "classifier__class_weight": "balanced"
+      },
+      {
+        "classifier__C": 1.0,
+        "classifier__class_weight": null
+      },
+      {
+        "classifier__C": 1.0,
+        "classifier__class_weight": "balanced"
+      }
+    ],
+    "Decision Tree": [
+      {
+        "class_weight": null,
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "min_samples_split": 20
+      },
+      {
+        "class_weight": null,
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10
+      },
+      {
+        "class_weight": "balanced",
+        "max_depth": 4,
+        "min_samples_leaf": 20,
+        "min_samples_split": 20
+      },
+      {
+        "class_weight": "balanced",
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10
+      }
+    ],
+    "Random Forest": [
+      {
+        "class_weight": null,
+        "max_depth": 10,
+        "max_features": 0.7,
+        "min_samples_leaf": 5,
+        "n_estimators": 120
+      },
+      {
+        "class_weight": null,
+        "max_depth": 16,
+        "max_features": 0.7,
+        "min_samples_leaf": 2,
+        "n_estimators": 160
+      },
+      {
+        "class_weight": "balanced",
+        "max_depth": 10,
+        "max_features": 0.7,
+        "min_samples_leaf": 5,
+        "n_estimators": 120
+      },
+      {
+        "class_weight": "balanced",
+        "max_depth": 16,
+        "max_features": 0.7,
+        "min_samples_leaf": 2,
+        "n_estimators": 160
+      }
+    ],
+    "XGBoost": [
+      {
+        "learning_rate": 0.07,
+        "max_depth": 2,
+        "n_estimators": 160,
+        "reg_lambda": 5,
+        "scale_pos_weight": 1
+      },
+      {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "n_estimators": 220,
+        "reg_lambda": 8,
+        "scale_pos_weight": 1
+      },
+      {
+        "learning_rate": 0.07,
+        "max_depth": 2,
+        "n_estimators": 160,
+        "reg_lambda": 5,
+        "scale_pos_weight": 3
+      },
+      {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "n_estimators": 220,
+        "reg_lambda": 8,
+        "scale_pos_weight": 3
+      }
+    ]
+  },
+  "feature_names": [
+    "VHM0",
+    "VHM0_SW1",
+    "VHM0_WW",
+    "VTM02",
+    "VTPK",
+    "eastward_wind",
+    "northward_wind",
+    "wind_speed",
+    "VMDR_sin",
+    "VMDR_cos",
+    "VHM0_lag_6h",
+    "VHM0_lag_24h",
+    "VHM0_change_3h",
+    "VHM0_roll_mean_12h",
+    "VHM0_roll_std_12h",
+    "wind_speed_roll_mean_12h",
+    "month_sin",
+    "month_cos"
+  ],
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "study_status": "Exploratory: earlier test results informed experimental questions; no independent confirmatory claim.",
+  "versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "threadpoolctl": "3.7.0"
+  }
+}

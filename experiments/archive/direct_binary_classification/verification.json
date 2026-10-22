@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "horizons": [
+    6,
+    24,
+    48,
+    72
+  ],
+  "models_reloaded": 16,
+  "original_files_unchanged": 269,
+  "dataset_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "independent_test_and_validation_scores": true,
+  "independent_derived_comparisons_and_saved_confusion_counts": true,
+  "evaluation_contains_no_fit_calls": true,
+  "fixed_feature_count": 18,
+  "exact_future_targets_and_regression_test_origins_identical": true,
+  "threshold": 0.5,
+  "test_based_tuning": false
+}

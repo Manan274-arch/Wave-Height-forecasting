@@ -1,0 +1,177 @@
+{
+  "horizon_hours": 12,
+  "feature_names": [
+    "VHM0",
+    "VHM0_SW1",
+    "VHM0_WW",
+    "VTM02",
+    "VTPK",
+    "eastward_wind",
+    "northward_wind",
+    "wind_speed",
+    "VMDR_sin",
+    "VMDR_cos",
+    "VHM0_lag_6h",
+    "VHM0_lag_24h",
+    "VHM0_change_3h",
+    "VHM0_roll_mean_12h",
+    "VHM0_roll_std_12h",
+    "wind_speed_roll_mean_12h",
+    "month_sin",
+    "month_cos"
+  ],
+  "partitions": {
+    "Training": {
+      "nominal_rows": 20456,
+      "rows": 20444,
+      "start": "2015-01-02 00:00:00+00:00",
+      "end": "2021-12-31 09:00:00+00:00",
+      "history_excluded": 8,
+      "purged": 4,
+      "unavailable_targets": 0
+    },
+    "Validation": {
+      "nominal_rows": 2922,
+      "rows": 2918,
+      "start": "2022-01-01 00:00:00+00:00",
+      "end": "2022-12-31 15:00:00+00:00",
+      "history_excluded": 0,
+      "purged": 4,
+      "unavailable_targets": 0
+    },
+    "Testing": {
+      "nominal_rows": 5846,
+      "rows": 5842,
+      "start": "2023-01-01 06:00:00+00:00",
+      "end": "2024-12-31 09:00:00+00:00",
+      "history_excluded": 0,
+      "purged": 0,
+      "unavailable_targets": 4
+    }
+  },
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "refit_rows": 23362,
+  "selection": "No new tuning, model selection or early stopping; clone original six-hour compact estimators.",
+  "models": {
+    "Linear Regression": {
+      "file": "models/linear_regression.joblib",
+      "sha256": "5775676a9f4e8073a0244fd9bcb77c898386a06fdffafed99bc5f30d3dea453c",
+      "selected_parameters": {},
+      "estimator_parameters": {
+        "copy_X": true,
+        "fit_intercept": true,
+        "n_jobs": null,
+        "positive": false,
+        "tol": 1e-06
+      },
+      "original_model_sha256": "70329ee93b2b237505ddbe463c76ea64125b37a2270f3992340f971632f261e9"
+    },
+    "Decision Tree": {
+      "file": "models/decision_tree.joblib",
+      "sha256": "7e6281d46f1c5817eaf6e8c50fe7eda3a355294b66ed645a03c6bd518ae31c2c",
+      "selected_parameters": {
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10
+      },
+      "estimator_parameters": {
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": 8,
+        "max_features": null,
+        "max_leaf_nodes": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "random_state": 42,
+        "splitter": "best"
+      },
+      "original_model_sha256": "fb546a97aa592a3f66c45b0b7b34fd74d1d9dd060f2fc53b0887c6fcf6edbab1"
+    },
+    "Random Forest": {
+      "file": "models/random_forest.joblib",
+      "sha256": "4df025b6580ce61cd7947c01877f5aad28c460df342dc33959b6a7791178f202",
+      "selected_parameters": {
+        "max_depth": 10,
+        "max_features": 0.7,
+        "min_samples_leaf": 5,
+        "n_estimators": 120
+      },
+      "estimator_parameters": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": 10,
+        "max_features": 0.7,
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 5,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 120,
+        "n_jobs": 4,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "original_model_sha256": "20a21770584cf8a6f1325760e5e4ae86dbc445b4897609855566b43f1f6bcc72"
+    },
+    "XGBoost": {
+      "file": "models/xgboost.joblib",
+      "sha256": "c9f66521da3347b644e7804936511ee862446f2e8b3a31c629b2cec2a14cc33d",
+      "selected_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "n_estimators": 220,
+        "reg_lambda": 8
+      },
+      "estimator_parameters": {
+        "objective": "reg:squarederror",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.8,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": false,
+        "eval_metric": null,
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 4,
+        "max_leaves": null,
+        "min_child_weight": null,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 220,
+        "n_jobs": 4,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": null,
+        "reg_lambda": 8,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.8,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null
+      },
+      "original_model_sha256": "31aab3eced688deddc8b453d70c3596567da2ee2bf2f637ebbe6814dfc4f2556"
+    }
+  }
+}

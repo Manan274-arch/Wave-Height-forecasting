@@ -1,0 +1,2 @@
+family,sample_count,mae,rmse,r2,mean_signed_error,median_absolute_error,maximum_absolute_error,high_count,high_mae,high_rmse,negative_prediction_count,target_values_sha256,current_values_sha256
+Persistence,5822,0.21043627619374783,0.31821886001911537,0.7989432075194143,0.0004637581587083433,0.13000000000000034,1.85,116,0.7625,0.9406073789734539,0,0018989a580da9e6569906631272dfb6f9c52ead33d0df91334db823a5fe058d,40a2e1cb97f4e7ff25f085b95b9ddf2d737252b30e905f6613b267d647ebb92e

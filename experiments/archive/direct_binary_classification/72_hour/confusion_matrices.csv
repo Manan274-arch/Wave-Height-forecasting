@@ -1,0 +1,21 @@
+method,actual,predicted,count
+Persistence,0,0,5300
+Persistence,0,1,142
+Persistence,1,0,142
+Persistence,1,1,238
+Logistic Regression,0,0,4853
+Logistic Regression,0,1,589
+Logistic Regression,1,0,6
+Logistic Regression,1,1,374
+Decision Tree,0,0,5028
+Decision Tree,0,1,414
+Decision Tree,1,0,55
+Decision Tree,1,1,325
+Random Forest,0,0,5152
+Random Forest,0,1,290
+Random Forest,1,0,63
+Random Forest,1,1,317
+XGBoost,0,0,5278
+XGBoost,0,1,164
+XGBoost,1,0,106
+XGBoost,1,1,274

@@ -1,0 +1,47 @@
+feature,selected,physical_role_or_removal_reason,most_correlated_other_selected,absolute_training_correlation,training_start,training_end,selection_used_target
+VHM0,True,Current total sea-state height; legitimate persistence information.,VHM0_roll_mean_12h,0.9967857632610096,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_SW1,True,One dominant-swell height; retained for physical partition information despite high correlation with total height.,VHM0,0.9908083366821332,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_SW2,False,Limit swell-height representation to the dominant partition; retain total and wind-sea heights.,VHM0,0.5229371919928587,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_WW,True,Wind-sea height distinguishes local forcing from swell.,wind_speed,0.8148666097508889,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM01_SW1,False,Use VTM02 and VTPK as representative mean/peak periods instead of many period variants and a period lag.,VTPK,0.6900191146088559,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM01_SW2,False,Use VTM02 and VTPK as representative mean/peak periods instead of many period variants and a period lag.,VHM0_SW1,0.27274377777849923,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM01_WW,False,Use VTM02 and VTPK as representative mean/peak periods instead of many period variants and a period lag.,wind_speed,0.8914055753988327,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM02,True,Current mean wave period; representative spectral period.,VHM0_SW1,0.5025020677106874,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM10,False,Use VTM02 and VTPK as representative mean/peak periods instead of many period variants and a period lag.,VTM02,0.7560487856587689,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTPK,True,Peak period complements the mean-period measure.,VMDR_cos,0.49269713921153824,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+eastward_wind,True,Signed eastward forcing and wind orientation.,wind_speed,0.6351081265434777,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+northward_wind,True,Signed northward forcing and wind orientation.,VTM02,0.32563182460109286,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed,True,Current forcing magnitude; nonlinear magnitude is useful even with signed components.,VHM0_WW,0.8148666097508889,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_sin,True,Total wave direction without a discontinuity at north.,VMDR_cos,0.8246744695907698,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_cos,True,Paired circular encoding needed to represent wave direction.,VMDR_sin,0.8246744695907698,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_SW1_sin,False,Replace multiple partition-specific directions with total direction and signed wind components.,VMDR_sin,0.6958643073706627,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_SW1_cos,False,Replace multiple partition-specific directions with total direction and signed wind components.,VMDR_cos,0.8197459882542202,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_SW2_sin,False,Replace multiple partition-specific directions with total direction and signed wind components.,month_sin,0.12410370217659288,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_SW2_cos,False,Replace multiple partition-specific directions with total direction and signed wind components.,month_cos,0.20120247821223292,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_WW_sin,False,Replace multiple partition-specific directions with total direction and signed wind components.,eastward_wind,0.842894978162649,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VMDR_WW_cos,False,Replace multiple partition-specific directions with total direction and signed wind components.,northward_wind,0.8436370742955287,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_lag_3h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,VHM0_roll_mean_12h,0.9988844317183347,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_lag_6h,True,Representative recent sea-state history.,VHM0_roll_mean_12h,0.9988844103975046,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_lag_12h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,VHM0_lag_6h,0.9929880888651893,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_lag_24h,True,Longer daily sea-state history without all intermediate lags.,VHM0_lag_6h,0.974842177088583,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_lag_3h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,wind_speed_roll_mean_12h,0.8848568332258436,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_lag_6h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,wind_speed_roll_mean_12h,0.8848664790482352,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_lag_12h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,wind_speed_roll_mean_12h,0.5846347829304954,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_SW1_lag_6h,False,Keep total-height 6h/24h lags; 3h height history is encoded by current height and its 3h change.,VHM0_lag_6h,0.9908076652718029,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VTM02_lag_3h,False,Use VTM02 and VTPK as representative mean/peak periods instead of many period variants and a period lag.,VTM02,0.9397886230853758,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_change_3h,True,Recent trend; also encodes the omitted three-hour lag.,VHM0_WW,0.23485781032954017,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_change_6h,False,Keep one height trend; avoid multiple overlapping wave/wind changes and exact linear redundancies.,VHM0_change_3h,0.7580735934206352,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_change_12h,False,Keep one height trend; avoid multiple overlapping wave/wind changes and exact linear redundancies.,VHM0_change_3h,0.5430561959075502,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_change_3h,False,Keep one height trend; avoid multiple overlapping wave/wind changes and exact linear redundancies.,wind_speed,0.3663736699634622,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_change_6h,False,Keep one height trend; avoid multiple overlapping wave/wind changes and exact linear redundancies.,wind_speed,0.5068305098071975,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_mean_6h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",VHM0,0.9992371455566101,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_mean_12h,True,One trailing mean summarizing recent sea-state level.,VHM0_lag_6h,0.9988844103975046,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_mean_24h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",VHM0_roll_mean_12h,0.9970483104729608,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_max_12h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",VHM0_roll_mean_12h,0.9978106394115919,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_max_24h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",VHM0_roll_mean_12h,0.992933431059643,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+VHM0_roll_std_12h,True,Trailing variability rather than another height-level summary.,VHM0_WW,0.39712675948221293,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_roll_mean_6h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",wind_speed,0.9304435675526207,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_roll_mean_12h,True,One trailing wind-forcing memory measure.,wind_speed,0.7815450324377283,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+wind_speed_roll_max_12h,False,"Keep one height mean/variability pair and one wind mean; omit overlapping means, maxima and windows.",wind_speed_roll_mean_12h,0.9221415088765609,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+month_sin,True,Seasonal phase representing monsoon-related annual variation.,VTM02,0.47208248345431736,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False
+month_cos,True,Companion seasonal encoding avoids a year-end discontinuity.,VHM0_roll_mean_12h,0.6282047131852497,2015-01-02 00:00:00+00:00,2021-12-28 21:00:00+00:00,False

@@ -1,0 +1,3 @@
+purpose,best_iteration,best_rounds,fitted_rounds,fit_end,stopping_start,stopping_end,best_rmse,no_early_stopping_validation_rmse
+training_tail_round_selection,448,449,479,2020-12-13 00:00:00+00:00,2020-12-13 09:00:00+00:00,2021-12-31 15:00:00+00:00,0.09012495714907569,
+original_validation_final_round_selection,368,369,409,2021-12-31 15:00:00+00:00,2022-01-01 00:00:00+00:00,2022-12-31 21:00:00+00:00,0.06877594932712665,0.06850936547605527

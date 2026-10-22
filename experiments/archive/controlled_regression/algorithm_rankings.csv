@@ -1,0 +1,41 @@
+horizon_hours,feature_set,method,ml_rank,rmse,method_type
+6,full,XGBoost,1.0,0.0638510641749224,learned
+6,full,Linear Regression,2.0,0.0654025596976674,learned
+6,full,Random Forest,3.0,0.065713365594899,learned
+6,full,Decision Tree,4.0,0.0747285829120131,learned
+6,full,Persistence,,0.0706787276781439,baseline
+6,compact,XGBoost,1.0,0.0648380684208796,learned
+6,compact,Random Forest,2.0,0.0658737257144826,learned
+6,compact,Linear Regression,3.0,0.0658854483123961,learned
+6,compact,Decision Tree,4.0,0.0726388900243733,learned
+6,compact,Persistence,,0.0706787276781439,baseline
+24,full,XGBoost,1.0,0.1480011372156898,learned
+24,full,Linear Regression,2.0,0.1535103715594626,learned
+24,full,Random Forest,3.0,0.156392711694651,learned
+24,full,Decision Tree,4.0,0.1675647467516395,learned
+24,full,Persistence,,0.1641917302702548,baseline
+24,compact,XGBoost,1.0,0.1480628531886382,learned
+24,compact,Linear Regression,2.0,0.1541046136627551,learned
+24,compact,Random Forest,3.0,0.1541093412279121,learned
+24,compact,Decision Tree,4.0,0.1673996609970289,learned
+24,compact,Persistence,,0.1641917302702548,baseline
+48,full,XGBoost,1.0,0.2206944460084444,learned
+48,full,Linear Regression,2.0,0.2324276356990994,learned
+48,full,Random Forest,3.0,0.2336342821161401,learned
+48,full,Decision Tree,4.0,0.2485119155748845,learned
+48,full,Persistence,,0.2525885202238714,baseline
+48,compact,XGBoost,1.0,0.2203353350459874,learned
+48,compact,Random Forest,2.0,0.2280806158335607,learned
+48,compact,Linear Regression,3.0,0.2331584334278258,learned
+48,compact,Decision Tree,4.0,0.2493685883838038,learned
+48,compact,Persistence,,0.2525885202238714,baseline
+72,full,XGBoost,1.0,0.2735026893953746,learned
+72,full,Random Forest,2.0,0.2788106232662962,learned
+72,full,Linear Regression,3.0,0.290247570687168,learned
+72,full,Decision Tree,4.0,0.2982687281501955,learned
+72,full,Persistence,,0.3182188600191153,baseline
+72,compact,XGBoost,1.0,0.2720147404911411,learned
+72,compact,Random Forest,2.0,0.2769397596367052,learned
+72,compact,Linear Regression,3.0,0.2911651324496389,learned
+72,compact,Decision Tree,4.0,0.2983277244792526,learned
+72,compact,Persistence,,0.3182188600191153,baseline

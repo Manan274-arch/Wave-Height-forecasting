@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "existing_files_byte_identical": 358,
+  "original_csv_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "fixed_original_six_hour_configurations_verified": true,
+  "new_hyperparameter_search": false,
+  "horizon_hours": 12,
+  "features": 18,
+  "training_rows": 20444,
+  "validation_rows": 2918,
+  "test_rows": 5842,
+  "refit_rows": 23362,
+  "common_test_origins": 5842,
+  "models_reloaded": 4,
+  "figures": 7,
+  "independent_validation_test_classification_comparison_metrics": true,
+  "paired_bootstrap_independently_reproduced": true,
+  "evaluation_contains_no_fit_calls": true
+}

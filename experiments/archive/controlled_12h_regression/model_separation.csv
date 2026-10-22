@@ -1,0 +1,3 @@
+horizon_hours,best_rmse,best_mae,best_elevated_f1,best_elevated_precision,best_elevated_recall,best_worst_rmse_gap,Linear Regression_minus_xgboost_rmse,xgboost_advantage_percent_over_Linear Regression,Random Forest_minus_xgboost_rmse,xgboost_advantage_percent_over_Random Forest
+6,XGBoost,XGBoost,XGBoost,Decision Tree,Linear Regression,0.007800821603493671,0.0010473798915164728,1.5896983603273318,0.0010356572936029707,1.5721856967553862
+12,XGBoost,XGBoost,XGBoost,Decision Tree,XGBoost,0.012659797109301985,0.0034792061184374945,3.37699116432634,0.002573965938084649,2.5204920529431645

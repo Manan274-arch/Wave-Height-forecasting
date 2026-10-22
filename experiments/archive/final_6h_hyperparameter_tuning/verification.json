@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "original_files_byte_identical": 334,
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "models_reloaded": 4,
+  "feature_count": 18,
+  "horizon_hours": 6,
+  "train_rows": 20446,
+  "validation_rows": 2920,
+  "test_rows": 5844,
+  "refit_rows": 23366,
+  "cv_fold_scores": 441,
+  "xgboost_outer_scoring_folds": 240,
+  "nested_stopping_and_outer_scoring_separation": true,
+  "test_and_validation_metrics_independently_recalculated": true,
+  "classification_and_comparison_metrics_independently_recalculated": true,
+  "evaluation_contains_no_fit_calls": true,
+  "final_xgboost_rounds": 369
+}

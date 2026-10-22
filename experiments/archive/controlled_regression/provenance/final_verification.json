@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "previous_files_byte_identical": 132,
+  "shared_source_change": "Only horizon guard and error message extended from 6/24 to 6/24/48/72; old CLI unchanged.",
+  "previous_6h_24h_data_fingerprints_identical": true,
+  "previous_full_test_metrics_reproduced": [
+    6,
+    24
+  ],
+  "full_compact_origins_targets_identical": [
+    6,
+    24,
+    48,
+    72
+  ],
+  "exact_targets_and_cv_gaps_verified": true,
+  "future_perturbation_causality_check": "passed",
+  "models_reloaded_and_predictions_verified": 32,
+  "unique_persistence_baselines": 4,
+  "figures": 22,
+  "master_rows": 32,
+  "common_test_origins": 5822,
+  "test_and_category_metrics_independently_recalculated": true,
+  "common_origin_metrics_independently_recalculated": true,
+  "master_and_comparison_tables_verified": true,
+  "validation_verification_scope": "Persistence independently recalculated; ML validation metrics agree with pre-refit metadata. Training-only validation predictions were not retained, so those metrics cannot be independently reconstructed without post-test fitting, which was not performed.",
+  "evaluation_and_comparison_contain_no_fit_calls": true,
+  "dataset_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8"
+}

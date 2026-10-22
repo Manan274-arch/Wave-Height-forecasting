@@ -1,0 +1,17 @@
+model,actual,predicted,count
+Linear Regression,0,0,5429
+Linear Regression,0,1,33
+Linear Regression,1,0,56
+Linear Regression,1,1,324
+Decision Tree,0,0,5441
+Decision Tree,0,1,21
+Decision Tree,1,0,78
+Decision Tree,1,1,302
+Random Forest,0,0,5437
+Random Forest,0,1,25
+Random Forest,1,0,59
+Random Forest,1,1,321
+XGBoost,0,0,5433
+XGBoost,0,1,29
+XGBoost,1,0,55
+XGBoost,1,1,325

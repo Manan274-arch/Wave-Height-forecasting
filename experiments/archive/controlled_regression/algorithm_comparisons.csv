@@ -1,0 +1,9 @@
+horizon_hours,feature_set,linear_beats_tree,forest_beats_tree,xgb_beats_forest,xgb_beats_linear,methods_beating_persistence
+6,compact,True,True,True,True,"Linear Regression, Random Forest, XGBoost"
+6,full,True,True,True,True,"Linear Regression, Random Forest, XGBoost"
+24,compact,True,True,True,True,"Linear Regression, Random Forest, XGBoost"
+24,full,True,True,True,True,"Linear Regression, Random Forest, XGBoost"
+48,compact,True,True,True,True,"Decision Tree, Linear Regression, Random Forest, XGBoost"
+48,full,True,True,True,True,"Decision Tree, Linear Regression, Random Forest, XGBoost"
+72,compact,True,True,True,True,"Decision Tree, Linear Regression, Random Forest, XGBoost"
+72,full,True,True,True,True,"Decision Tree, Linear Regression, Random Forest, XGBoost"

@@ -1,0 +1,6 @@
+family,new_high_origins,new_high_detected,new_high_missed,onset_recall,currently_nonhigh_high_predictions,currently_nonhigh_false_high,currently_nonhigh_high_precision,currently_nonhigh_false_high_rate,current_high_future_high,current_nonhigh_future_high,current_nonhigh_future_nonhigh,current_high_future_nonhigh
+Persistence,48,0,48,0.0,0,0,,0.0,110,48,5680,6
+Logistic Regression,48,23,25,0.4791666666666667,61,38,0.3770491803278688,0.006690140845070422,110,48,5680,6
+Decision Tree,48,12,36,0.25,47,35,0.2553191489361702,0.006161971830985915,110,48,5680,6
+Random Forest,48,16,32,0.3333333333333333,51,35,0.3137254901960784,0.006161971830985915,110,48,5680,6
+XGBoost,48,20,28,0.4166666666666667,47,27,0.425531914893617,0.004753521126760563,110,48,5680,6

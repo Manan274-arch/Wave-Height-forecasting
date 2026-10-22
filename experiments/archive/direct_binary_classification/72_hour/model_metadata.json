@@ -1,0 +1,122 @@
+{
+  "horizon_hours": 72,
+  "forecast_steps": 24,
+  "target": "VHM0(t+72h), exactly; not a future maximum",
+  "raw_rows": 29224,
+  "feature_count": 18,
+  "invalid_target_alignment_count": 0,
+  "incomplete_future_targets": 24,
+  "boundary_rule": "70/10/20 of raw timestamps before horizon exclusions",
+  "nominal_validation_start": "2022-01-01 00:00:00+00:00",
+  "nominal_test_start": "2023-01-01 06:00:00+00:00",
+  "partitions": {
+    "Training": {
+      "nominal_rows": 20456,
+      "rows": 20424,
+      "start": "2015-01-02 00:00:00+00:00",
+      "end": "2021-12-28 21:00:00+00:00",
+      "incomplete_targets_excluded": 0,
+      "boundary_purged": 24,
+      "history_excluded": 8
+    },
+    "Validation": {
+      "nominal_rows": 2922,
+      "rows": 2898,
+      "start": "2022-01-01 00:00:00+00:00",
+      "end": "2022-12-29 03:00:00+00:00",
+      "incomplete_targets_excluded": 0,
+      "boundary_purged": 24,
+      "history_excluded": 0
+    },
+    "Testing": {
+      "nominal_rows": 5846,
+      "rows": 5822,
+      "start": "2023-01-01 06:00:00+00:00",
+      "end": "2024-12-28 21:00:00+00:00",
+      "incomplete_targets_excluded": 24,
+      "boundary_purged": 0,
+      "history_excluded": 0
+    }
+  },
+  "feature_set": "compact",
+  "compact_feature_file_sha256": "c5de7470975a5ad1068238251ebd9ee6e7f9380978a5da2a17e7477612d16d24",
+  "controlled_study_status": "Exploratory extension; fixed features/grids; no confirmatory independence claimed.",
+  "feature_names": [
+    "VHM0",
+    "VHM0_SW1",
+    "VHM0_WW",
+    "VTM02",
+    "VTPK",
+    "eastward_wind",
+    "northward_wind",
+    "wind_speed",
+    "VMDR_sin",
+    "VMDR_cos",
+    "VHM0_lag_6h",
+    "VHM0_lag_24h",
+    "VHM0_change_3h",
+    "VHM0_roll_mean_12h",
+    "VHM0_roll_std_12h",
+    "wind_speed_roll_mean_12h",
+    "month_sin",
+    "month_cos"
+  ],
+  "probability_threshold": 0.5,
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "cv_gap": 24,
+  "refit_rows": 23322,
+  "models": {
+    "Logistic Regression": {
+      "selected_parameters": {
+        "classifier__C": 0.1,
+        "classifier__class_weight": "balanced"
+      },
+      "mean_cv_elevated_f1": 0.48516760602642073,
+      "std_cv_elevated_f1": 0.0693541064268272,
+      "candidate_count": 4,
+      "file": "models/logistic_regression.joblib",
+      "sha256": "21795dd7f66f0e76893e446c880f025603e009201dd41d8491d80e1539bd9b65"
+    },
+    "Decision Tree": {
+      "selected_parameters": {
+        "class_weight": "balanced",
+        "max_depth": 8,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10
+      },
+      "mean_cv_elevated_f1": 0.4645149433467129,
+      "std_cv_elevated_f1": 0.01548793090765415,
+      "candidate_count": 4,
+      "file": "models/decision_tree.joblib",
+      "sha256": "15a07185b10457e51c65e4e3de2a6c4d3e1af5ee00c6df6b9369feac57aab243"
+    },
+    "Random Forest": {
+      "selected_parameters": {
+        "class_weight": "balanced",
+        "max_depth": 10,
+        "max_features": 0.7,
+        "min_samples_leaf": 5,
+        "n_estimators": 120
+      },
+      "mean_cv_elevated_f1": 0.5066647964512521,
+      "std_cv_elevated_f1": 0.02983783250416668,
+      "candidate_count": 4,
+      "file": "models/random_forest.joblib",
+      "sha256": "e52590530207c50185f5ad128c9270a6392538afd0fe668dcacacbf36e7dcd99"
+    },
+    "XGBoost": {
+      "selected_parameters": {
+        "learning_rate": 0.05,
+        "max_depth": 4,
+        "n_estimators": 220,
+        "reg_lambda": 8,
+        "scale_pos_weight": 3
+      },
+      "mean_cv_elevated_f1": 0.5166341964986335,
+      "std_cv_elevated_f1": 0.046903354819913354,
+      "candidate_count": 4,
+      "file": "models/xgboost.joblib",
+      "sha256": "8520dd5c09987dc3526e51625471e7bbdb7dda3d81fa742be4aebd91c9ae408d"
+    }
+  }
+}

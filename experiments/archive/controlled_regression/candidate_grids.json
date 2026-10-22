@@ -1,0 +1,128 @@
+{
+  "Linear Regression": [
+    {}
+  ],
+  "Decision Tree": [
+    {
+      "max_depth": [
+        4
+      ],
+      "min_samples_split": [
+        20
+      ],
+      "min_samples_leaf": [
+        20
+      ]
+    },
+    {
+      "max_depth": [
+        8
+      ],
+      "min_samples_split": [
+        10
+      ],
+      "min_samples_leaf": [
+        10
+      ]
+    },
+    {
+      "max_depth": [
+        12
+      ],
+      "min_samples_split": [
+        4
+      ],
+      "min_samples_leaf": [
+        4
+      ]
+    }
+  ],
+  "Random Forest": [
+    {
+      "n_estimators": [
+        120
+      ],
+      "max_depth": [
+        10
+      ],
+      "min_samples_leaf": [
+        5
+      ],
+      "max_features": [
+        0.7
+      ]
+    },
+    {
+      "n_estimators": [
+        160
+      ],
+      "max_depth": [
+        16
+      ],
+      "min_samples_leaf": [
+        2
+      ],
+      "max_features": [
+        1.0
+      ]
+    },
+    {
+      "n_estimators": [
+        220
+      ],
+      "max_depth": [
+        null
+      ],
+      "min_samples_leaf": [
+        1
+      ],
+      "max_features": [
+        0.7
+      ]
+    }
+  ],
+  "XGBoost": [
+    {
+      "n_estimators": [
+        160
+      ],
+      "max_depth": [
+        2
+      ],
+      "learning_rate": [
+        0.07
+      ],
+      "reg_lambda": [
+        5
+      ]
+    },
+    {
+      "n_estimators": [
+        220
+      ],
+      "max_depth": [
+        4
+      ],
+      "learning_rate": [
+        0.05
+      ],
+      "reg_lambda": [
+        8
+      ]
+    },
+    {
+      "n_estimators": [
+        300
+      ],
+      "max_depth": [
+        6
+      ],
+      "learning_rate": [
+        0.05
+      ],
+      "reg_lambda": [
+        5
+      ]
+    }
+  ]
+}

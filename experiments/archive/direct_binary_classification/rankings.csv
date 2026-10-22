@@ -1,0 +1,61 @@
+horizon_hours,metric,method,rank,score
+6,elevated_f1,Persistence,5,0.9263157894736842
+6,elevated_f1,Logistic Regression,2,0.934959349593496
+6,elevated_f1,Decision Tree,3,0.9326145552560648
+6,elevated_f1,Random Forest,4,0.9266304347826086
+6,elevated_f1,XGBoost,1,0.9351351351351352
+6,elevated_recall,Persistence,1,0.9263157894736842
+6,elevated_recall,Logistic Regression,4,0.9078947368421052
+6,elevated_recall,Decision Tree,2,0.9105263157894736
+6,elevated_recall,Random Forest,5,0.8973684210526316
+6,elevated_recall,XGBoost,2,0.9105263157894736
+6,macro_f1,Persistence,5,0.9605956692610004
+6,macro_f1,Logistic Regression,2,0.9652878939748302
+6,macro_f1,Decision Tree,3,0.9640233382894612
+6,macro_f1,Random Forest,4,0.9608499142503256
+6,macro_f1,XGBoost,1,0.9653753863472534
+24,elevated_f1,Persistence,1,0.8289473684210527
+24,elevated_f1,Logistic Regression,4,0.8154506437768241
+24,elevated_f1,Decision Tree,5,0.7769985974754559
+24,elevated_f1,Random Forest,3,0.8256658595641646
+24,elevated_f1,XGBoost,2,0.8282828282828283
+24,elevated_recall,Persistence,3,0.8289473684210527
+24,elevated_recall,Logistic Regression,4,0.75
+24,elevated_recall,Decision Tree,5,0.7289473684210527
+24,elevated_recall,Random Forest,1,0.8973684210526316
+24,elevated_recall,XGBoost,2,0.8631578947368421
+24,macro_f1,Persistence,1,0.9085191220998632
+24,macro_f1,Logistic Regression,4,0.9018493995052472
+24,macro_f1,Decision Tree,5,0.8812476340474059
+24,macro_f1,Random Forest,3,0.9061969850816216
+24,macro_f1,XGBoost,2,0.907893711091065
+48,elevated_f1,Persistence,2,0.7315789473684211
+48,elevated_f1,Logistic Regression,3,0.7155963302752294
+48,elevated_f1,Decision Tree,5,0.5949926362297496
+48,elevated_f1,Random Forest,4,0.6934984520123839
+48,elevated_f1,XGBoost,1,0.7468354430379747
+48,elevated_recall,Persistence,2,0.7315789473684211
+48,elevated_recall,Logistic Regression,3,0.6157894736842106
+48,elevated_recall,Decision Tree,5,0.531578947368421
+48,elevated_recall,Random Forest,4,0.5894736842105263
+48,elevated_recall,XGBoost,1,0.7763157894736842
+48,macro_f1,Persistence,2,0.856431675519073
+48,macro_f1,Logistic Regression,3,0.8493482287392865
+48,macro_f1,Decision Tree,5,0.7849746898478682
+48,macro_f1,Random Forest,4,0.837760665991665
+48,macro_f1,XGBoost,1,0.8642180895042679
+72,elevated_f1,Persistence,3,0.6263157894736842
+72,elevated_f1,Logistic Regression,5,0.5569620253164557
+72,elevated_f1,Decision Tree,4,0.580875781948168
+72,elevated_f1,Random Forest,2,0.6423505572441742
+72,elevated_f1,XGBoost,1,0.6699266503667481
+72,elevated_recall,Persistence,5,0.6263157894736842
+72,elevated_recall,Logistic Regression,1,0.9842105263157894
+72,elevated_recall,Decision Tree,2,0.8552631578947368
+72,elevated_recall,Random Forest,3,0.8342105263157895
+72,elevated_recall,XGBoost,4,0.7210526315789474
+72,macro_f1,Persistence,3,0.8001112207199366
+72,macro_f1,Logistic Regression,5,0.7496003214631982
+72,macro_f1,Decision Tree,4,0.7681576059384545
+72,macro_f1,Random Forest,2,0.804613394414524
+72,macro_f1,XGBoost,1,0.8224933455048224
