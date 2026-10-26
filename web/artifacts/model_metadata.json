@@ -1,0 +1,178 @@
+{
+  "horizon_hours": 12,
+  "target": "VHM0(t+12h)",
+  "binary_threshold_m": 2.5,
+  "feature_names": [
+    "VHM0",
+    "VHM0_SW1",
+    "VHM0_WW",
+    "VTM02",
+    "VTPK",
+    "eastward_wind",
+    "northward_wind",
+    "wind_speed",
+    "VMDR_sin",
+    "VMDR_cos",
+    "VHM0_lag_6h",
+    "VHM0_lag_24h",
+    "VHM0_change_3h",
+    "VHM0_roll_mean_12h",
+    "VHM0_roll_std_12h",
+    "wind_speed_roll_mean_12h",
+    "month_sin",
+    "month_cos"
+  ],
+  "partitions": {
+    "Training": {
+      "nominal_rows": 20456,
+      "rows": 20444,
+      "start": "2015-01-02 00:00:00+00:00",
+      "end": "2021-12-31 09:00:00+00:00",
+      "history_excluded": 8,
+      "purged": 4,
+      "unavailable_targets": 0
+    },
+    "Validation": {
+      "nominal_rows": 2922,
+      "rows": 2918,
+      "start": "2022-01-01 00:00:00+00:00",
+      "end": "2022-12-31 15:00:00+00:00",
+      "history_excluded": 0,
+      "purged": 4,
+      "unavailable_targets": 0
+    },
+    "Testing": {
+      "nominal_rows": 5846,
+      "rows": 5842,
+      "start": "2023-01-01 06:00:00+00:00",
+      "end": "2024-12-31 09:00:00+00:00",
+      "history_excluded": 0,
+      "purged": 0,
+      "unavailable_targets": 4
+    }
+  },
+  "refit_rows": 23362,
+  "refit_origin_start": "2015-01-02 00:00:00+00:00",
+  "refit_origin_end": "2022-12-31 15:00:00+00:00",
+  "refit_target_end": "2023-01-01 03:00:00+00:00",
+  "source_sha256": "421199b25b1b7c475d8f09b65317f37b0aa0bf19a3385da0696e510d8a575ed8",
+  "versions": {
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scipy": "1.17.1",
+    "scikit-learn": "1.9.1",
+    "xgboost": "3.2.0",
+    "joblib": "1.6.0",
+    "matplotlib": "3.11.2",
+    "threadpoolctl": "3.7.0"
+  },
+  "procedure": "Fixed configurations; validate training-only fit; fresh clone refitted on eligible train+validation. No tuning or test selection.",
+  "models": {
+    "Linear Regression": {
+      "file": "models\\linear_regression.joblib",
+      "sha256": "5775676a9f4e8073a0244fd9bcb77c898386a06fdffafed99bc5f30d3dea453c",
+      "parameters": {
+        "scale": {
+          "copy": true,
+          "with_mean": true,
+          "with_std": true
+        },
+        "regressor": {
+          "copy_X": true,
+          "fit_intercept": true,
+          "n_jobs": null,
+          "positive": false,
+          "tol": 1e-06
+        }
+      }
+    },
+    "Decision Tree": {
+      "file": "models\\decision_tree.joblib",
+      "sha256": "f860d7be3452bcf969241f2a59d2c2914c7de486529f994acef197a1565a2406",
+      "parameters": {
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": 8,
+        "max_features": null,
+        "max_leaf_nodes": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 10,
+        "min_samples_split": 10,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "random_state": 42,
+        "splitter": "best"
+      }
+    },
+    "Random Forest": {
+      "file": "models\\random_forest.joblib",
+      "sha256": "c6696fddd63522e5dd44613df43ffb7f86bb24709125afbeb6001917951674cf",
+      "parameters": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "criterion": "squared_error",
+        "max_depth": 10,
+        "max_features": 0.7,
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 5,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 120,
+        "n_jobs": 4,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      }
+    },
+    "XGBoost": {
+      "file": "models\\xgboost.joblib",
+      "sha256": "c9f66521da3347b644e7804936511ee862446f2e8b3a31c629b2cec2a14cc33d",
+      "parameters": {
+        "objective": "reg:squarederror",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": 0.8,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": false,
+        "eval_metric": null,
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": 0.05,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": 4,
+        "max_leaves": null,
+        "min_child_weight": null,
+        "missing": "NaN",
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": 220,
+        "n_jobs": 4,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": null,
+        "reg_lambda": 8,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": 0.8,
+        "tree_method": "hist",
+        "validate_parameters": null,
+        "verbosity": null
+      }
+    }
+  }
+}
