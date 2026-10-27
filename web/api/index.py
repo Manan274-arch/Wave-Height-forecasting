@@ -47,18 +47,20 @@ def bootstrap():
     r = pd.read_csv(ROOT/'regression_metrics.csv')
     c = pd.read_csv(ROOT/'classification_metrics.csv')
     metrics = r.merge(c, on=['model','sample_count']).to_dict('records')
-    dates = [t.isoformat() for t in p.index]
+    dates = [t.isoformat() for t in p.target_timestamp]
     calm = p.actual_VHM0.idxmin()
     elevated = p.actual_VHM0.idxmax()
     difficult = (p.XGBoost-p.actual_VHM0).abs().idxmax()
     monthly = source.groupby(source.index.month).agg(height=('VHM0','mean'),wind=('wind_speed','mean')).reset_index().rename(columns={'timestamp':'month'}).to_dict('records')
-    return {'dates':dates,'metrics':metrics,'monthly':monthly,'presets':{'Calm seas':calm.isoformat(),'Elevated event':elevated.isoformat(),'Largest XGBoost error':difficult.isoformat()}}
+    return {'dates':dates,'metrics':metrics,'monthly':monthly,'presets':{'Calm seas':p.loc[calm,'target_timestamp'].isoformat(),'Elevated event':p.loc[elevated,'target_timestamp'].isoformat(),'Largest XGBoost error':p.loc[difficult,'target_timestamp'].isoformat()}}
 
 def forecast(timestamp):
     source, p = data()
-    try: t = pd.Timestamp(timestamp)
+    try:
+        target = pd.Timestamp(timestamp)
+        t = target - pd.Timedelta(hours=12)
     except (ValueError,TypeError): raise ValueError('Choose a valid test timestamp.')
-    if t not in p.index: raise ValueError('Choose a timestamp in the held-out test set.')
+    if t not in p.index: raise ValueError('Choose a prediction time in the held-out test set.')
     # Compute only from observations available at the forecast origin.
     history = source.loc[:t]
     x = features(history).iloc[[-1]]
@@ -67,6 +69,26 @@ def forecast(timestamp):
     curve = source.loc[t-pd.Timedelta(hours=48):t+pd.Timedelta(hours=12)]
     return {'origin':t.isoformat(),'target':p.loc[t,'target_timestamp'].isoformat(),'actual':float(p.loc[t,'actual_VHM0']),'current':float(record.VHM0),'wind':float(record.wind_speed),'direction':float(record.VMDR),'predictions':outputs,'features':{k:float(v) for k,v in x.iloc[0].items()},'history':[{'time':i.isoformat(),'height':float(row.VHM0),'future':bool(i>t)} for i,row in curve.iterrows()]}
 
+def timeline(start, period):
+    _, p = data()
+    try:
+        begin = pd.Timestamp(start)
+        if begin.tzinfo is None: begin = begin.tz_localize('UTC')
+        else: begin = begin.tz_convert('UTC')
+        if pd.isna(begin): raise ValueError('Missing date')
+        begin = begin.normalize()
+    except (ValueError, TypeError): raise ValueError('Choose a valid start date.')
+    if period not in ('week', 'month'): raise ValueError('Choose week or month.')
+    if period == 'month': begin = begin.replace(day=1)
+    end = begin + (pd.DateOffset(months=1) if period == 'month' else pd.Timedelta(days=7))
+    rows = p[(p.target_timestamp >= begin) & (p.target_timestamp < end)]
+    if rows.empty: raise ValueError('No test results for this period. Choose dates in 2023 or 2024.')
+    return {'start':begin.isoformat(), 'end':end.isoformat(), 'records':[
+        {'time':row.target_timestamp.isoformat(), 'actual':float(row.actual_VHM0),
+         'predictions':{name:float(row[name]) for name in FILES}}
+        for _, row in rows.iterrows()
+    ]}
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed = urlparse(self.path)
@@ -74,6 +96,9 @@ class handler(BaseHTTPRequestHandler):
             if parsed.path in ('/api/bootstrap','/api/bootstrap/'): payload=bootstrap()
             elif parsed.path in ('/api/forecast','/api/forecast/'):
                 payload=forecast(parse_qs(parsed.query).get('timestamp',[''])[0])
+            elif parsed.path == '/api/timeline':
+                query = parse_qs(parsed.query)
+                payload=timeline(query.get('start',[''])[0], query.get('period',['month'])[0])
             elif parsed.path == '/api/health': payload={'status':'ok','inference':'saved-models','horizon_hours':12}
             else: return self.send_json({'error':'Not found'},404)
             self.send_json(payload)

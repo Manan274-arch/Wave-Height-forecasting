@@ -55,3 +55,5 @@ All times are UTC. The API only accepts existing test origins. It computes featu
 `web/artifacts` is a deployable snapshot of the project's saved models, metadata, raw observations, metrics and test predictions. If canonical artifacts change, copy the new files into this directory and rerun verification. No model retraining happens in this app. Joblib files must come only from this trusted project.
 
 This is a research demonstration for one offshore Udupi location. The 2.5 m threshold is a chosen research threshold. The app has no live data feed and is not an operational warning system.
+
+Prediction time selection: the date picker and example cards now select the target time. The API subtracts exactly 12 hours to find the model input origin. Recorded outcomes, exported target times and predictions all refer to the selected time. Restart the local Python API after this update.
