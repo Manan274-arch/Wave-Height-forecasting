@@ -5,7 +5,7 @@
   "functions": {
     "api/index.py": {
       "maxDuration": 60,
-      "excludeFiles": "{node_modules/**,src/**,public/**,scripts/**,dist/**,**/.venv/**,**/venv/**,.git/**,.vercel/**,**/__pycache__/**,**/*.pyc,**/tests/**,**/test/**,**/benchmarks/**,**/docs/**,*.md,*.html,*.js,package*.json,artifacts/validation*}"
+      "excludeFiles": "{**/experiments/**,**/data/**,**/models/**,**/results/**,**/node_modules/**,**/src/**,**/public/**,**/scripts/**,**/dist/**,**/.venv/**,**/.vercel/**,**/__pycache__/**,**/tests/**,**/test/**,**/docs/**,**/benchmarks/**}"
     }
   },
   "rewrites": [
